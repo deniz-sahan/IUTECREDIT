@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "6f061dc3-b368-4649-a915-0e4c640116a5",
+		"name": "FactorialPageTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14043586"
+	},
+	"item": [
+		{
+			"name": "https://qainterview.pythonanywhere.com/factorial\n",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"function factorialize(num) {\r",
+							"  if (num < 0) \r",
+							"        return -1;\r",
+							"  else if (num == 0) \r",
+							"      return 1;\r",
+							"  else {\r",
+							"      return (num * factorialize(num - 1));\r",
+							"  }\r",
+							"}\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    \r",
+							"});\r",
+							"\r",
+							"console.log(factorialize(4));\r",
+							"\r",
+							"\r",
+							"var input = pm.iterationData.get(\"input\");\r",
+							"console.log(factorialize(input));\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "number",
+							"value": "4",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "number",
+							"value": "0",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "number",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "number",
+							"value": "-1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "number",
+							"value": "deniz",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://qainterview.pythonanywhere.com/factorial\n",
+					"protocol": "https",
+					"host": [
+						"qainterview",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"factorial\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "factorial test ( read data from csv)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.iterationData.get(\"input\");"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    \r",
+							"});\r",
+							"\r",
+							"var expected = pm.iterationData.get(\"result\");\r",
+							"console.log(expected);\r",
+							"\r",
+							"\r",
+							"pm.test(\"Result is equals to expected\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.answer).to.eql(expected);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "number",
+							"value": "{{input}}",
+							"type": "text"
+						},
+						{
+							"key": "number",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://qainterview.pythonanywhere.com/\n",
+					"protocol": "https",
+					"host": [
+						"qainterview",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"\n"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
